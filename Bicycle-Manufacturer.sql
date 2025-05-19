@@ -1,4 +1,5 @@
---QUERY 1: 
+--QUERY 1: Calc Quantity of items, Sales value & Order quantity by each Subcategory in L12M (find out The lastest date, and then get data in last 12 months)
+
 WITH max_date AS (
       SELECT DATE (MAX(ModifiedDate)) AS latest_date
       FROM `adventureworks2019.Sales.SalesOrderDetail`)
@@ -20,7 +21,7 @@ WHERE DATE(a.ModifiedDate) >= (
 GROUP BY period, c.Name 
 ORDER BY period DESC, c.Name;
 
---correct
+--Cách query khác 
 select format_datetime('%b %Y', a.ModifiedDate) month
       ,c.Name
       ,sum(a.OrderQty) qty_item
@@ -45,7 +46,8 @@ where date(a.ModifiedDate) >=  (select date_sub(date(max(a.ModifiedDate)), INTER
 -- where date(a.ModifiedDate) >= date(2013,06,30)
 -- where date(a.ModifiedDate) between   date(2013,06,30) and date(2014,06,30)
 
---QUERY 2:
+--QUERY 2: Ranking Top 3 TeritoryID with biggest Order quantity of every year. If there's TerritoryID with same quantity in a year, do not skip the rank number
+
 WITH data_raw AS (
       SELECT 
         EXTRACT(year FROM a.ModifiedDate) AS year
@@ -84,10 +86,11 @@ SELECT
   , prv_qty
   , qty_diff
 FROM rank_cte
-WHERE rank <-3; 
+WHERE rank <=3; 
 
 
---QUERY 3
+--QUERY 3: Ranking Top 3 TeritoryID with biggest Order quantity of every year. If there's TerritoryID with same quantity in a year, do not skip the rank number
+
 WITH total_qty as (-- Tính tổng Order theo năm và Territory
       SELECT 
               EXTRACT(year FROM a.ModifiedDate) AS year
@@ -110,7 +113,7 @@ WHERE  rank <=3;
 
 
 
---QUERY 4: 
+--QUERY 4: Calc Total Discount Cost belongs to Seasonal Discount for each SubCategory
 
 WITH data_raw as (
       SELECT 
@@ -135,7 +138,8 @@ GROUP BY 1,2;
 
 
 
---QUERY 5:
+--QUERY 5:Retention rate of Customer in 2014 with status of Successfully Shipped (Cohort Analysis)
+
 WITH info_cte as (
       SELECT 
           EXTRACT(month FROM ModifiedDate) AS month_order 
@@ -177,7 +181,8 @@ GROUP BY 1,2
 ORDER BY 1; 
 
 
---QUERY 6:
+--QUERY 6:Trend of Stock level & MoM diff % by all product in 2011. If %gr rate is null then 0. Round to 1 decimal
+
 WITH data_raw AS (
       SELECT 
         a.Name
@@ -207,7 +212,7 @@ ORDER BY Name;
 
 
 
---QUERY 7:
+--QUERY 7: Calc Ratio of Stock / Sales in 2011 by product name, by month. Order results by month desc, ratio desc. Round Ratio to 1 decimal
   
 with 
 sale_info as (
@@ -246,11 +251,10 @@ and a.mth = b.mth
 and a.yr = b.yr
 order by 1 desc, 7 desc;
 
---(*) nếu nó null thì mình cứ để null, mình đổi lại thành 0 đôi lúc sẽ sai ý nghĩa
---giống như đi thi đc 0 điểm khác với việc k đi thi á
 
 
---QUERY 8: 
+--QUERY 8: No of order and value at Pending status in 2014
+
 SELECT  
   EXTRACT(year FROM ModifiedDate) AS year
   , status
