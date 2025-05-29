@@ -156,7 +156,7 @@ ORDER BY period DESC, c.Name;
     
       Formats the ModifiedDate into a readable month-year string (e.g., "Oct 2013").
 
- -   **Results Snapshot:**
+ -   📸**Results Snapshot:**
    
 ![image](https://github.com/user-attachments/assets/01f69794-ddb6-4550-97c3-542e2422c47e)
 
@@ -234,7 +234,7 @@ WHERE rank <= 3;
    Final SELECT: Filters and returns only the top 3 subcategories with the highest growth rates.
 
 
- -   **Results Snapshot:**
+ -   📸**Results Snapshot:**
    
 <img width="632" alt="image" src="https://github.com/user-attachments/assets/42a29dde-675c-41a3-a540-eb82133d0d84" />
 
@@ -309,18 +309,19 @@ WHERE  rank <=3;
    
       Filters for top 3 ranked territories per year using WHERE rank <= 3. 
    
- -   **Results Snapshot:**
+ -   📸**Results Snapshot:**
 <img width="559" alt="image" src="https://github.com/user-attachments/assets/4c7b250e-7819-4d71-803c-66474a58f4d1" />
 
  -   **📊 Observation:**
 
-    Territory 4 was consistently ranked #1 across all years shown, especially in 2013 with 26,682 orders.
+Territory 4 was consistently ranked #1 across all years shown, especially in 2013 with 26,682 orders.
 
-    There’s a noticeable decline in order quantity over years: e.g., Territory 4 went from 26,682 (2013) → 11,632 (2014).
+There’s a noticeable decline in order quantity over years: e.g., Territory 4 went from 26,682 (2013) → 11,632 (2014).
     
-    Top 3 ranks are correctly retained for each year, and the use of DENSE_RANK() ensures no skipped ranks when values tie.
+Top 3 ranks are correctly retained for each year, and the use of DENSE_RANK() ensures no skipped ranks when values tie.
     
-    Useful for tracking regional sales performance trends and shifts over time
+Useful for tracking regional sales performance trends and shifts over time
+
 ---
 ### TASK 4: Seasonal Discount Analysis:
 
@@ -380,7 +381,7 @@ FROM data_raw
   
   Sums the discount_cost to compute total discount cost per subcategory per year.
   
- -   **Results Snapshot:**
+ -  📸 **Results Snapshot:**
 
    <img width="511" alt="image" src="https://github.com/user-attachments/assets/9a13d510-edad-4889-b515-adde5fd3bb38" />
 
@@ -388,13 +389,14 @@ FROM data_raw
 
 Helmet products received a significant increase in discount value from 2012 (≈ 827.65) to 2013 (≈ 1606.04), nearly doubling.
       
-      This may reflect:
+This may reflect:
       
-      - Higher sales volume of helmets under seasonal promotions.
-        
-      - Larger discount rates applied in 2013.
-        
-      - Such insights can guide promotion budget planning and target product categories that respond well to seasonal discounts.
+Higher sales volume of helmets under seasonal promotions.
+
+Larger discount rates applied in 2013.
+
+Such insights can guide promotion budget planning and target product categories that respond well to seasonal discounts.
+
 ---
 
 ### TASK 5: Customer Retention
@@ -487,7 +489,7 @@ Groups by cohort month (month_join) and the time difference (month_diff).
 
 Counts how many unique customers were active in each period relative to their first purchase month.
 
- -   **Results Snapshot:**
+ -   📸**Results Snapshot:**
 
 <img width="511" alt="image" src="https://github.com/user-attachments/assets/dd7b1747-7bdb-4b8f-b231-71b69f42caa6" />
 
@@ -570,7 +572,7 @@ Uses LEAD() window function to fetch the stock quantity of the next month (to si
 Computes the MoM % change with the formula
 COALESCE(..., 0) is used to handle NULL values where no previous month exists.
 
- -   **Results Snapshot:**
+ -   📸**Results Snapshot:**
 <img width="881" alt="image" src="https://github.com/user-attachments/assets/08e2806e-5214-4f83-993e-64cec1a6325b" />
 
  -   **📊 Observation:**
@@ -579,12 +581,13 @@ Several products show sharp changes in inventory levels month-over-month, signal
 ---
 ### TASK 7: Stock-to-Sales Ratio
 
- 📌 **Requirement:** Calculate the Stock-to-Sales Ratio by product name and month in 2011, ordered by month (descending) and ratio (descending). Round ratio to 1 decimal.
+- 📌 **Requirement:** Calculate the Stock-to-Sales Ratio by product name and month in 2011, ordered by month (descending) and ratio (descending). Round ratio to 1 decimal.
 
- -  🎯 **Analytical Purpose:** To evaluate inventory efficiency by identifying products with unusually high stock levels relative to sales. Helps prioritize inventory clearance or adjust future production.
+- 🎯 **Analytical Purpose:** To evaluate inventory efficiency by identifying products with unusually high stock levels relative to sales. Helps prioritize inventory clearance or adjust future production.
 
- -  📝**SQL Query:**
-   ```sql
+-  📝**SQL Query:**
+  
+```sql
 With 
 sale_info as (
   select 
@@ -622,15 +625,16 @@ and a.mth = b.mth
 and a.yr = b.yr
 order by 1 desc, 7 desc;
 ```
+- 📋**Query Explanation:**
 
- -  📋**Query Explanation:**
    - `sale_info`: Sums sales per product per month in 2011.
 
    - `stock_info`: Sums stock quantity per product per month in 2011.
 
   - Final SELECT calculates the stock/sales ratio and sorts by latest month and highest ratio.
 
- -   **Results Snapshot:**
+-  📸**Results Snapshot:**
+
 ![image](https://github.com/user-attachments/assets/df24f2e2-dfba-4a2a-81e5-73bfde752640)
 
  -   **📊 Observation:**
@@ -669,7 +673,7 @@ Calculates:
 
 `value`: Total due amount of those orders.
 
- -   **Results Snapshot:**
+ -  📸 **Results Snapshot:**
 <img width="556" alt="image" src="https://github.com/user-attachments/assets/6e4c4099-be4c-41c7-8d52-14ecbeccb96a" />
 
  -   **📊 Observation:**
