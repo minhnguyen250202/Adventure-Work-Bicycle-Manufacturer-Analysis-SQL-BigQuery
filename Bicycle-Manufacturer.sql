@@ -40,11 +40,6 @@ where date(a.ModifiedDate) >=  (select date_sub(date(max(a.ModifiedDate)), INTER
 group by 1,2
 order by 2,1;
 
---1 số cách khác để filter L12M:
-where date(a.ModifiedDate) >=  (select date_sub(date(max(a.ModifiedDate)), INTERVAL 12 month)
-                                from `adventureworks2019.Sales.SalesOrderDetail` )--2013-06-30
--- where date(a.ModifiedDate) >= date(2013,06,30)
--- where date(a.ModifiedDate) between   date(2013,06,30) and date(2014,06,30)
 
 --QUERY 2: Ranking Top 3 TeritoryID with biggest Order quantity of every year. If there's TerritoryID with same quantity in a year, do not skip the rank number
 
