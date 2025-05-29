@@ -1,7 +1,7 @@
 
 # 📊 Adventure Work Bicycle Manufacturer Analysis -SQL, BigQuery
 
-![image](https://github.com/user-attachments/assets/f5d850a1-c561-4cb9-889c-acc5f88b54ce)
+![image](https://github.com/user-attachments/assets/c41c3e3d-c436-4d7e-ae05-3362a20f361a)
 
  
 Author: Nguyễn Thị Ánh Minh 
@@ -45,7 +45,7 @@ This analysis aims to evaluate the sales and operational performance of a bicycl
 - **Inventory Management:** Track monthly stock trends, stock-to-sales ratio, and pending orders to improve supply chain efficiency.
   
 
-***👥 Who is this project for?***
+**👥 Who is this project for?**
 
   - **Sales Managers:** To understand which products and territories perform best and identify areas for improvement.
   
@@ -69,7 +69,7 @@ This analysis aims to evaluate the sales and operational performance of a bicycl
 
 - **Source**: AdventureWorks 2019 Database is provided by Microsoft
 
-- 🏢 **Overview of AdventureWorks 2019**
+- **Overview of AdventureWorks 2019**
 
   - Database Type: **Relational database**
 
@@ -93,14 +93,10 @@ The analysis is based on the AdventureWorks 2019 database. Key tables and their 
 |`Production.WorkOrder`|Tracks the production of items, including start and end dates, quantities, and product IDs. Used in inventory flow and production timeline analysis.|
 |`Purchasing.PurchaseOrderHeader`|Stores purchase order data related to inventory replenishment. Includes order date, status, vendor, and total amount. Supports inventory planning and stock analysis.|
 
-**💡 Notes:** Tables are joined primarily via `ProductID`, `SalesOrderID`, 'SpecialOfferID`, and `ProductSubcategoryID`, depending on the context.
+**💡 Notes:** Tables are joined primarily via `ProductID`, `SalesOrderID`, `SpecialOfferID`, and  `ProductSubcategoryID`, depending on the context.
 
 ---
 # 🌈Main Process: 
-
-## 1️⃣ Data Preparation (Cleaning & Processing) 
-
-## 2️⃣ Exploratory Data Analysis (EDA)
 
 ### SQL Analysis Tasks:
 ---
@@ -165,6 +161,10 @@ ORDER BY period DESC, c.Name;
 ![image](https://github.com/user-attachments/assets/01f69794-ddb6-4550-97c3-542e2422c47e)
 
  -   **📊 Observation:**
+   
+   The data reveals noticeable disparities in average monthly order volumes among different subcategories. For instance, in September, the subcategory Bottles and Cages had an average of 380 orders, indicating high customer demand. In contrast, Bike Racks received only 71 orders, and Bottom Brackets had a much lower average of 19 orders.
+
+  These differences highlight varying levels of product popularity and suggest the need for tailored strategies in inventory planning, marketing efforts, and product promotion based on specific subcategory performance.
 
 ---
 ### TASK 2: Year-over-Year (YoY) growth in Product subcategory 
@@ -173,13 +173,13 @@ ORDER BY period DESC, c.Name;
 
  -  🎯 **Analytical Purpose:**
 
-  - Identify product subcategories with the highest YoY growth to:
-
-  - Prioritize investment in high-growth segments.
-
-  - Understand which product lines are gaining momentum over time.
-
- - Support strategic planning for sales, inventory, and marketing.
+    - Identify product subcategories with the highest YoY growth to:
+ 
+    - Prioritize investment in high-growth segments.
+ 
+    - Understand which product lines are gaining momentum over time.
+ 
+    - Support strategic planning for sales, inventory, and marketing.
    
  -  📝**SQL Query:**
 
@@ -240,12 +240,13 @@ WHERE rank <= 3;
 
 
  -   **📊 Observation:**
+   
+   Mountain Frames achieved the highest YoY growth of **5.21%**, indicating a significant surge in demand.
 
-   - **Mountain Frames achieved the highest YoY growth of 5.21%**, indicating a significant surge in demand.
-  
-   - **Socks and Road Frames** also showed **strong performance** with growth rates of **4.21% and 3.89% respectively.**
-  
-   - These products may benefit from increased marketing efforts or inventory planning to sustain growth momentum.
+   Socks and Road Frames** also showed **strong performance** with growth rates of **4.21% and 3.89% respectively**  
+   
+   These products may benefit from increased marketing efforts or inventory planning to sustain growth momentum.
+    
 ---
 ### TASK 3: Top Territories
 
@@ -254,8 +255,6 @@ WHERE rank <= 3;
   - Use ranking by year.
 
   - If multiple TerritoryIDs have the same order_cnt, do not skip rank numbers (use DENSE_RANK()).
-
-
 
  -  🎯 **Analytical Purpose:** This analysis helps the business understand which sales territories are consistently performing well year over year, allowing management to:
 
@@ -302,15 +301,13 @@ WHERE  rank <=3;
     
     Joins SalesOrderDetail with SalesOrderHeader to get TerritoryID.
     
-   **Step 2:** rank_cte
+    **Step 2:** rank_cte
    
-    Applies DENSE_RANK() to assign rankings within each year based on order_cnt (total order quantity).
-    
-    DENSE_RANK() is used to avoid gaps in ranking when multiple TerritoryIDs have the same total quantity.
+     Applies DENSE_RANK() to assign rankings within each year based on order_cnt (total order quantity). DENSE_RANK() is used to avoid gaps in ranking when multiple TerritoryIDs have the same total quantity.
    
-   **Step 3:** Final Output
+     **Step 3:** Final Output
    
-   Filters for top 3 ranked territories per year using WHERE rank <= 3. 
+      Filters for top 3 ranked territories per year using WHERE rank <= 3. 
    
  -   **Results Snapshot:**
 <img width="559" alt="image" src="https://github.com/user-attachments/assets/4c7b250e-7819-4d71-803c-66474a58f4d1" />
@@ -388,15 +385,16 @@ FROM data_raw
    <img width="511" alt="image" src="https://github.com/user-attachments/assets/9a13d510-edad-4889-b515-adde5fd3bb38" />
 
  -   **📊 Observation:**
-    Helmet products received a significant increase in discount value from 2012 (≈ 827.65) to 2013 (≈ 1606.04), nearly doubling.
-    
-    This may reflect:
-    
-    - Higher sales volume of helmets under seasonal promotions.
-    
-    - Larger discount rates applied in 2013.
-    
-    - Such insights can guide promotion budget planning and target product categories that respond well to seasonal discounts.
+
+Helmet products received a significant increase in discount value from 2012 (≈ 827.65) to 2013 (≈ 1606.04), nearly doubling.
+      
+      This may reflect:
+      
+      - Higher sales volume of helmets under seasonal promotions.
+        
+      - Larger discount rates applied in 2013.
+        
+      - Such insights can guide promotion budget planning and target product categories that respond well to seasonal discounts.
 ---
 
 ### TASK 5: Customer Retention
@@ -678,23 +676,48 @@ Calculates:
 
 In 2014, there were 224 purchase orders still in Pending status, totaling nearly 3.87 million USD. This significant amount highlights the need for timely order processing to avoid delays or inventory issues.
 
-
 --- 
 # 🔎 Final Conclusions & Recommendations
 
-Top Subcategories & Growth: Subcategories with the highest growth should be prioritized for marketing campaigns. Slow-growing categories may require product improvements or promotions.
+## ✅ Conclusion
 
+**The analysis of AdventureWorks data** has revealed key insights into **product performance, customer behavior, regional trends, and operational efficiency.** These findings can serve as a foundation for strategic decision-making across sales, marketing, and supply chain management.
 
-Top Territories: Focusing on the top 3 performing territories each year can help identify best practices for expansion.
+**1. Product Performance & Growth**
 
+There is **a significant variation in product demand** across subcategories. For example, Bottles and Cages demonstrated strong demand with an average of 380 orders in September, whereas Bottom Brackets had only 19. This disparity suggests the importance of subcategory-level inventory planning and targeted marketing. Additionally, subcategories like Mountain Frames, Socks, and Road Frames have shown strong YoY growth, indicating they could benefit from increased promotional investment and stock availability to sustain momentum.
 
-Seasonal Discount Optimization: Evaluate the impact of seasonal discounts to ensure they generate sufficient sales without excessive costs.
+**2. Territory Insights**
 
+Territory 4 consistently leads in order volume each year, despite a declining trend (e.g., 26,682 orders in 2013 → 11,632 in 2014). Monitoring performance across top territories allows for identifying best practices, reallocating resources, and launching targeted regional campaigns to reverse downward trends.
 
-Customer Retention: Enhance customer loyalty programs to maintain a high retention rate.
+**3.Seasonal Discount Optimization**
 
+**The significant rise in seasonal discounts**—such as the doubling of discounts on Helmets from 2012 to 2013—suggests that certain categories respond well to promotions. However, it is essential to evaluate whether increased discounts translate into proportional revenue gains and to adjust discount strategies accordingly.
 
-Stock Management: Ensure sufficient stock for fast-moving products while avoiding overstocking of slow-moving items.
+**4. Customer Retention**
 
+Retention rates show that **a majority of customers make only one purchase**, especially after their first interaction. While minor spikes (e.g., in M-3) may relate to promotions, the overall trend indicates a need to invest in customer loyalty programs, implement personalized marketing, and encourage repeat purchases through automated follow-ups and value-driven offers.
 
-Pending Orders: Regularly monitor pending orders to minimize delays and improve customer satisfaction.
+**5. Inventory & Stock Management**
+
+There are signs of overstocking in slow-moving items, as seen with products like HL Mountain Frame – Black, 48, which had a Stock/Sales ratio of 27.0. Meanwhile, monthly volatility in inventory levels suggests a need for improved demand forecasting and tighter alignment between stock and sales trends.
+
+**6. Pending Orders Monitoring**
+
+With 224 pending purchase orders in 2014, valued at nearly $3.87 million, **delays in order processing represent a critical risk**. Regularly reviewing pending transactions can help minimize operational bottlenecks and ensure better customer satisfaction and fulfillment accuracy.
+
+## 💡 Recommendations
+
+  - **Prioritize top-performing and high-growth subcategories** in marketing and replenishment plans.
+  
+  - Leverage insights from top territories to replicate successful regional strategies.
+  
+  - **Optimize discount campaigns** based on profitability and seasonal effectiveness.
+  
+  - **Enhance customer retention** through **loyalty programs, reminders, and exclusive offers**.
+  
+  - Improve inventory planning by focusing on stock-to-sales ratios and minimizing overstock.
+  
+  - Set up regular audits for pending orders to prevent processing delays and lost sales.
+
